@@ -1,0 +1,22 @@
+\chapter{Conclusions}
+\paragraph{General results overview}
+The obtained results are not as good as the ones presented in the paper \cite{result} but it was expected since usually the shown results are obtained with the omission of some particulars, sometimes important, e.g. missing parameters.\\
+Concerning the recaptured images, the final results on the test set are worse than the expected values. However, the divergence between presented and achieved accuracies is not that large. Indeed, for certain camera models we achieve a classification accuracy of $95\%$ and $97\%$ in the best cases and of $80\%$ and $78\%$ in the worst cases.\\
+As average recognition accuracy, for the recaptured images we obtained an $88\%$ of correct classification rate against an expected $99.03\%$.\\
+Results of lower quality are obtained when trying to recognize single captured images; in this case the best accuracy achievable is around $80\%$ with an average of $56\%$ against the expected $94.89\%$.\\
+
+\paragraph{Analysis on the camera models}
+Along the paper has been explained that cameras provided with cheaper or older sensors perform poorely because their pictures are less sharp than most recent digital ones. In light of this, as expected, for low-cost cameras such as Kodak V550B, V550S and V610
+we obtained lower accuracies, still considerably lower than the presented ones in the reference paper.\\
+Eventually, we were surprised to see that TZ7 model performed badly in our algorithm while it's within the bests on according to the results shown in the paper.
+
+\paragraph{Reasons for the differencies}
+Some possible reasons for the observed differences in the final results, compared to the ones presented in the paper, may be the following ones :
+\begin{itemize}
+    \item ambiguity of the paper :
+    \begin{itemize}
+        \item sometimes, some steps are not clear enough in order to deeply understand the specific operation the authors make. In other words, they leave the door open to free interpratation of what they write leading to ambiguity and confusion when implementing a code;
+        \item the lack of parameters indication, i.e. for the dictionary learning algorithm most of the parameters are missing and we had to assume some random values. It would have been possible to execute a grid search but, since the whole program implies a large amount of time, this wasn't possible. \\
+              Another unclear point is how they initialize the sparse dictionaries because, in our case, we did not observed significant improvements doing so.
+    \end{itemize}
+\end{itemize}

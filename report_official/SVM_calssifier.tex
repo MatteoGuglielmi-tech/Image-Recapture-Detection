@@ -1,0 +1,17 @@
+\subsection{Classification}
+At this level of implementation, the SVM has already been trained and the model stored.\\
+This part of implementation consists of testing the SVM on the test set in order to adress its performances.\\
+By analogy with the training phase, this part's explanation is structured in points as well :
+\begin{itemize}
+    \item the first step consists in extracting the path of all images used for test, both recaptured and single captured, shot by all the cameras;
+    \item for each picture, the feature extraction process is performed and the ouput is saved within a .csv file equivalently to the training part;
+    \item consequently, a predition is carried out on each image and the results are showed in a table which exhibits: the amount of correctly and erroneously classified rate and the accuracy achieved for each camera model.\\
+          Furthermore, the confusion matrix for each camera is video-printed, where :
+          \begin{itemize}
+              \item the first element represents the True Negatives (images correctly classified as Single Captured);
+              \item the first element represents the False Negatives (images wrongly classified as Single Captured);
+              \item the first element represents the True Positives (images correctly classified as Recaptured);
+              \item the first element represents the False Positives (images wrongly classified as Recaptured);
+          \end{itemize}
+            It is noteworthy to adress that in order to obtain independent statistics, the classification process is performed separately on each camera model's test set.
+\end{itemize}

@@ -1,0 +1,9 @@
+\section{Dataset formation}
+This module automatically splits the whole dataset into training and test set as explained in the \textit{Section VI-A} of the reference paper \cite{paper}.\\
+As specified in the latter :
+\begin{itemize}
+    \item for single captured images, $15$ randomly chosen images are selected for training purposes;
+    \item concerning recaptured images, for every pair of cameras involved, where the first one is the device used to capture the original image and the second one the system used to recapture it, we randomly select $3$ pictures for training purposes.
+\end{itemize}
+The remaining ones, both for recaptured and single captured images, are kept for performance testing.\\
+For each camera, both in single captured and recaptured images, the outputs are two .txt files containing the paths of the Line Spread Profile matrices for training and test images respectively.

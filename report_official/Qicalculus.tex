@@ -1,0 +1,19 @@
+\section{$Q_i$ Calculus}
+    In this section we implement the method described in the paper \cite{paper} for the calculus of the matrix $Q$.\\
+    The proposed process determines, for any given single or recaptured image, a LSP matrix $Q_i$. 
+    Since this part is very computationally demanding, we stored the resulting matrices in the corresponding directory of each camera model to used them later on in the next steps.\\
+
+    The feature matrix extracted for each dataset's image contains the LSP of any columns presents in the selected blocks. We achieved these blocks by applying the following criterion, explained in details in the paper :
+    \begin{itemize}
+        \item firstly, the query image is converted to greyscale and all edges contained in the image are detected using a Canny Edge Detector (Canny Filter);
+        \item the query image is, then, divided into non-overlapping blocks $B(m,n)$ of size $W \times W$ with $W=16$ pixels;
+        \item then, we check for horizontal, near horizontal, vertical and near vertical single edges and the blocks are chosen by counting the number of columns containing only one non-zero value. A block is considered only when the condition $\eta \geq \beta W$ is satisfied, where $\beta=0.6$;
+        \item the LS function $q_i$ is then calculated by normalizing the gradient of each columns given the previously obtained blocks. Subsequently, all the $q_i$s are interpolated by $4 \times$ to increase the number of data points to $64$;
+        \item to determine the $\lambda_{avg}$, we compute the distance that embeds the $90\%$ of the spectral energy of each interpolated column of the $Q_i$ matrix. Consequently, we compute the mean of those distances;
+        \item at this level, only the greylevel blocks, which meet some contraints, are selected and the corresponding interpolated $q_i$ inserted in the $Q_i$ matrix of the image. These contraints are :
+        \begin{itemize}
+            \item the block-based variance $\sigma_{m,n}$ has to fall within the largest $20\%$ of all the computed values;
+            \item the average lambda's value $\overline{\lambda}_{m,n}$ has to fall between the smallest $10\%$ of all the computed values.
+        \end{itemize}
+    \end{itemize}
+    From now on, the Line Spread matrices for recaptured and single captured images are stored and they wll be used for training purposes.

@@ -1,0 +1,22 @@
+\section{Dictionary building}
+This script perform dictionary learning \cite{omp}. Given the training feature matrix S, which is obtained by the horizontal composition of all the previously computed $Q_i$, the goal of this technique is to obtain the best sparse dictionary, D $\in \mathbb{R}^{W \times K}$, that provides an optimal sparse representation for all the LSP matrices in S.\\
+Once the matrix S has been built, a very large matrix is obtained. In order to reduce its size, a sort of resizing operation is applied : the training feature matrix is obtained by keeping only one column out of four in the original matrix.\\
+The result is used to fed the \textit{K-SVD algorithm} whose main parameters are briefly discussed in the following sections (\ref{cha:ksvd}) \\
+Since the whole process requires a consistent amount of time, once both $D_{SC}$ and $D_{RC}$ have been built, they're saved in a .txt file. Doing so, they just have to be loaded in the program when they're needed later on.
+
+\subsection{K-SVD Parameters}
+\label{cha:ksvd}
+In our implementation, we used the K-SVD function provided by the sklearn library even though we hard coded an alternative version which turned out to be a little less efficient.\\
+This function takes as inputs some specific parameters which define the characteristics the output has to meet. Unfortunately, the \textbf{reference paper doesn't clearly specify the parameters}, same for the SVM implementation, so we had to make several trials in order to find a set of values which lead to a decent overall result. \\
+More precisely, the parameters to be specified are :
+\begin{itemize}
+    \item \textit{Number of components} : number of elements the output dictionary contains. Those ones may be zero or non-zero valued elements depending on the grade of sparsity defined (see below). The exact number is not defined in the paper so we sought a value which may represent a good trade-off between quality and computational demand.\\In the final implementation we set this parameter to $50$ but increasing the number of components may likely lead to better results;
+    \item \textit{Alpha} : consists in the sparsity controlling parameter. Reading the paper, at first it seems it has to be set to $0$ but, with this particular value, the obtained results are very low in quality. Guessing an alpha parameter equal to $1$ we observed a consistent increse in quality performance;
+    \item \textit{Maximum number of iterations} : integer number which indicates an upper bound on the number of iteration to perform. In the reference paper \cite{paper} it is clearly specified to use $160$;
+    \item \textit{Tollerance} : tollerance for numerical error. As defualt is to $10^{-8}$. In this case we used $10^{-6}$ as shown in a similar purpose algorithm developed in MathLab;
+    \item \textit{Transformation algorithm} : algorithm to process the data. We used the OMP algorithm, as specified in the reference paper, to estimate the sparse solution:
+    \item \textit{Number of non-zero coefficients in the transformation} : number of non-zero coefficients to the target for each column of the solution. This corresponds to the degree of sparsity of the output, in this specific case of the two dictionaries. This parameter in the reference paper is named as $L$ an indicates the optimal number of atoms in the dictionaries. It is explained that this parameters is set to $3$ because it coincide with the peak of the second derivative for our training sets.
+\end{itemize}
+
+\subsection{Dictionary initialization}
+As explained in section $VI-A$ of the reference paper 'The initial set of atoms was constructed from the Line Spread functions of the nine single capture cameras and 63 different LS functions determined from randomly selected image recapture camera combinations'. We actually implement this part but we have not noticed any significant difference.

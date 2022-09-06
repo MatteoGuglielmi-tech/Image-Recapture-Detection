@@ -1,0 +1,24 @@
+\chapter{Implementation}
+The developped algorithm is written in Python coding language.\\
+It was deemed appropriate to subdivide the whole script in five main modules in order to have a clean and modular package. This also allows for saving files with intermediate results to save computational power since some processes are very demanding.\\
+Enumerating the modules :
+\begin{itemize}
+    \item \textbf{dataset split} into training and test set;
+    \item \textbf{calculus} of the Line Spread Profile matrix \textbf{$Q_i$} for every image;
+    \item \textbf{building} of the over-complete \textbf{dictionaries} $D_{SC}$ and $D_{RC}$;
+    \item SVM \textbf{training}
+    \item address the performane of the \textbf{SVC testing} it on the test set.
+\end{itemize}
+\paragraph{How to use} Sequence of action in order to make this code work:
+\begin{enumerate}
+    \item run 'phase1$\_$QiCalculusdataset.py' (no need to do that because they are already computed in the given complete$\_$dataset folder) : compute all the matrices for each camera and type of image;
+    \item run 'dataset$\_$acquisition$\_$txt.py' : perform the training and test sets formation;
+    \item run 'make$\_$dictionary$\_$from$\_$txt.py' or 'make$\_$dictionary$\_$from$\_$txt$\_$.py' : the only difference here is that in the first module the building process start with complitely empty dictionaries; instead in the second one, dictionaries are initialized;
+    \item run 'SVM$\_$training.py' : compute and save the hyperplane equation which better  separates the plane linearly;
+    \item run 'SVM$\_$classifier.py' : saves significant statistics about achieved performances ;
+\end{enumerate}
+\input{datset_formulation.tex}
+\input{Qicalculus.tex}
+\input{make_dictionary.tex}
+\input{SVM_training.tex}
+\input{SVM_calssifier.tex}
